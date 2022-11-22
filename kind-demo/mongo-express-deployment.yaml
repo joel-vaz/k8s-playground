@@ -5,7 +5,7 @@ metadata:
   labels:
     app: mongo-express
 spec:
-  replicas: 1
+  replicas: 6
   selector:
     matchLabels:
       app: mongo-express
@@ -14,6 +14,7 @@ spec:
       labels:
         app: mongo-express
     spec:
+      restartPolicy: Always
       containers:
       - name: mongo-express
         image: mongo-express
@@ -34,7 +35,7 @@ spec:
             secretKeyRef:
               name: mongodb-secret
               key: mongo-root-password
-        - name: ME_CONFIG_MONGO_DB_SERVER
+        - name: ME_CONFIG_MONGODB_SERVER
           valueFrom:
             configMapKeyRef:
               name: mongodb-configmap
